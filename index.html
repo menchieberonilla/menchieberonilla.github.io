@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Rivera — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFFFF;
+    --surface: #FFFFFF;
+    --line: #DCE6F5;
+    --ink: #14213D;
+    --muted: #6B7A99;
+    --accent: #2E5FE8;
+    --accent-soft: #EAF0FE;
+    --amber: #6FA0F5;
+    --mono: 'Inter', sans-serif;
+    --display: 'Inter', sans-serif;
+    --body: 'Inter', sans-serif;
+    --maxw: 1120px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--accent); color: #fff; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .label{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .logo{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .logo span{ color: var(--accent); }
+  .navlinks{
+    display:flex;
+    gap: 28px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .navlinks a{
+    color: var(--muted);
+    transition: color .15s ease;
+    position: relative;
+  }
+  .navlinks a:hover{ color: var(--ink); }
+  .nav-cta{
+    font-family: var(--mono);
+    font-size: 12px;
+    border: 1px solid var(--ink);
+    padding: 8px 14px;
+    border-radius: 3px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .nav-cta:hover{ background: var(--ink); color: var(--bg); }
+  .navlinks-mobile{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 88px 0 80px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  h1{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+  }
+  h1 em{
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p.sub{
+    margin-top: 22px;
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 46ch;
+    line-height: 1.65;
+  }
+  .hero-cta{
+    margin-top: 34px;
+    display:flex;
+    gap: 14px;
+    align-items:center;
+  }
+  .btn{
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 12px 20px;
+    border-radius: 3px;
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--bg);
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn-primary:hover{ background: var(--accent); transform: translateY(-1px); }
+  .btn-ghost{
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 12px 2px;
+  }
+  .btn-ghost:hover{ color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- DASHBOARD CARD (signature element) ---------- */
+  .dash{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(20,20,15,0.03), 0 12px 32px -18px rgba(20,20,15,0.15);
+    overflow: hidden;
+  }
+  .dash-head{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .dash-head .dots{ display:flex; gap:6px; }
+  .dash-head .dots span{ width:8px; height:8px; border-radius:50%; background: var(--line); }
+  .dash-title{ font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+  .dash-body{ padding: 22px; }
+  .kpi-row{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .kpi{ }
+  .kpi .num{
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .kpi .cap{
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .chart-area{
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+  .bars{
+    display:flex;
+    align-items:flex-end;
+    gap: 8px;
+    height: 90px;
+  }
+  .bars .bar{
+    flex:1;
+    background: var(--accent-soft);
+    border-radius: 3px 3px 0 0;
+    position: relative;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    animation: grow 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .bars .bar.hi{ background: var(--accent); }
+  @keyframes grow{ to{ transform: scaleY(1); } }
+  .sparkline{ margin-top: 16px; }
+  .sparkline path{
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: draw 1.4s ease forwards .3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .bars .bar, .sparkline path{ animation: none; transform: none; stroke-dashoffset: 0; }
+  }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{ padding: 76px 0; border-bottom: 1px solid var(--line); }
+  .section-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 44px;
+    gap: 24px;
+  }
+  h2{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 34px);
+    letter-spacing: -0.01em;
+    margin-top: 6px;
+  }
+  .section-note{
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 34ch;
+    text-align: right;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .about-grid p{
+    color: var(--muted);
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .about-grid p strong{ color: var(--ink); font-weight: 600; }
+  .toolgrid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 24px;
+  }
+  .tool-cat{ border-top: 1px solid var(--line); padding-top: 12px; }
+  .tool-cat .label{ margin-bottom: 10px; }
+  .tool-cat ul{ list-style:none; }
+  .tool-cat li{
+    font-size: 14px;
+    padding: 5px 0;
+    color: var(--ink);
+    display:flex;
+    justify-content: space-between;
+  }
+  .tool-cat li .lvl{ font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .proj{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .proj:hover{ border-color: var(--accent); transform: translateY(-2px); }
+  .proj-top{
+    display:flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    margin-bottom: 18px;
+  }
+  .proj h3{
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .proj-tag{
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .proj p{
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .proj-metrics{
+    display:flex;
+    gap: 22px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .proj-metrics div .num{
+    font-family: var(--mono);
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .proj-metrics div .cap{
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .proj-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .proj-link svg{ transition: transform .15s ease; }
+  .proj:hover .proj-link svg{ transform: translate(2px,-2px); }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ display:flex; flex-direction:column; }
+  .trow{
+    display:grid;
+    grid-template-columns: 160px 1fr 200px;
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .trow:last-child{ border-bottom: 1px solid var(--line); }
+  .trow .when{ font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .trow h4{ font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .trow p{ font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .trow .co{ font-size: 13px; color: var(--accent); text-align: right; font-weight: 600; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{ padding: 76px 0 48px; }
+  .contact-inner{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .contact-inner h2{ max-width: 12ch; }
+  .contact-links{ display:flex; flex-direction:column; gap: 10px; align-items: flex-end; }
+  .contact-links a{
+    font-family: var(--mono);
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+  }
+  .contact-links a:hover{ border-color: var(--ink); }
+  .foot-bottom{
+    display:flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .about-grid{ grid-template-columns: 1fr; gap: 32px; }
+    .projects{ grid-template-columns: 1fr; }
+    .section-head{ flex-direction: column; align-items: flex-start; }
+    .section-note{ text-align:left; }
+    .trow{ grid-template-columns: 1fr; gap: 6px; }
+    .trow .co{ text-align:left; }
+    .navlinks{ display:none; }
+    .contact-inner{ flex-direction:column; align-items:flex-start; }
+    .contact-links{ align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">alex<span>·</span>rivera</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Get in touch →</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" style="border-bottom:1px solid var(--line); padding-bottom:80px;">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span class="dot"></span>
+          <span class="label">Data Analyst · Open to work</span>
+        </div>
+        <h1>I turn raw data into <em>decisions</em> people actually trust.</h1>
+        <p class="sub">Four years finding the story inside messy spreadsheets and event logs — then building the dashboards, models, and A/B tests that get stakeholders to act on it.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">View projects →</a>
+          <a class="btn btn-ghost" href="#contact">Download résumé</a>
+        </div>
+      </div>
+
+      <div class="dash" aria-hidden="true">
+        <div class="dash-head">
+          <span class="dash-title">Q3_retention_dashboard.sql</span>
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="dash-body">
+          <div class="kpi-row">
+            <div class="kpi"><div class="num">92.4%</div><div class="cap">model accuracy</div></div>
+            <div class="kpi"><div class="num">$1.8M</div><div class="cap">revenue impact</div></div>
+            <div class="kpi"><div class="num">-31%</div><div class="cap">churn, post-launch</div></div>
+          </div>
+          <div class="chart-area">
+            <div class="bars">
+              <div class="bar" style="height:38%; animation-delay:.05s"></div>
+              <div class="bar" style="height:55%; animation-delay:.1s"></div>
+              <div class="bar" style="height:44%; animation-delay:.15s"></div>
+              <div class="bar" style="height:70%; animation-delay:.2s"></div>
+              <div class="bar" style="height:60%; animation-delay:.25s"></div>
+              <div class="bar hi" style="height:92%; animation-delay:.3s"></div>
+              <div class="bar" style="height:78%; animation-delay:.35s"></div>
+            </div>
+            <svg class="sparkline" viewBox="0 0 280 40" width="100%" height="40" preserveAspectRatio="none">
+              <path d="M0,30 L40,26 L80,28 L120,14 L160,18 L200,8 L240,12 L280,4" fill="none" stroke="#C97A2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="label">01 · About</span>
+          <h2>Grounded in the numbers, built for the people reading them.</h2>
+        </div>
+        <p class="section-note">A quick summary of how I work and what I reach for.</p>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>I'm a data analyst based in Manila, working primarily with <strong>growth, product, and marketing teams</strong> who need clear answers fast, not a 40-tab spreadsheet.</p>
+          <p>My background is in statistics, but the job is really translation: turning a question like <strong>"why did signups drop"</strong> into a pipeline, a chart, and a recommendation a non-technical exec can act on in a meeting.</p>
+          <p>Outside of client work I write a short monthly newsletter breaking down public datasets — mostly as an excuse to keep my SQL sharp.</p>
+        </div>
+        <div class="toolgrid">
+          <div class="tool-cat">
+            <div class="label">Languages</div>
+            <ul>
+              <li>SQL <span class="lvl">daily</span></li>
+              <li>Python (pandas, scikit-learn) <span class="lvl">daily</span></li>
+              <li>R <span class="lvl">occasional</span></li>
+            </ul>
+          </div>
+          <div class="tool-cat">
+            <div class="label">Visualization</div>
+            <ul>
+              <li>Tableau <span class="lvl">advanced</span></li>
+              <li>Looker / Looker Studio <span class="lvl">advanced</span></li>
+              <li>Power BI <span class="lvl">proficient</span></li>
+            </ul>
+          </div>
+          <div class="tool-cat">
+            <div class="label">Infrastructure</div>
+            <ul>
+              <li>BigQuery / Snowflake <span class="lvl">daily</span></li>
+              <li>dbt <span class="lvl">proficient</span></li>
+              <li>Airflow <span class="lvl">occasional</span></li>
+            </ul>
+          </div>
+          <div class="tool-cat">
+            <div class="label">Methods</div>
+            <ul>
+              <li>A/B testing <span class="lvl">advanced</span></li>
+              <li>Cohort & retention analysis <span class="lvl">advanced</span></li>
+              <li>Forecasting <span class="lvl">proficient</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="label">02 · Selected work</span>
+          <h2>A few projects worth the deep dive.</h2>
+        </div>
+        <p class="section-note">Each one links to a write-up with methodology and code.</p>
+      </div>
+      <div class="projects">
+
+        <article class="proj">
+          <div class="proj-top">
+            <h3>Churn prediction model</h3>
+            <span class="proj-tag">Python · ML</span>
+          </div>
+          <p>Built a gradient-boosted model to flag at-risk subscribers 21 days before cancellation, then partnered with lifecycle marketing to design the intervention.</p>
+          <div class="proj-metrics">
+            <div><div class="num">92.4%</div><div class="cap">recall</div></div>
+            <div><div class="num">-31%</div><div class="cap">churn reduction</div></div>
+            <div><div class="num">6 wks</div><div class="cap">to production</div></div>
+          </div>
+          <a class="proj-link" href="#">Read the write-up
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </a>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <h3>Pricing A/B test</h3>
+            <span class="proj-tag">Experimentation</span>
+          </div>
+          <p>Designed and ran a three-arm pricing test across 40k users, handling power analysis, novelty-effect checks, and the exec readout.</p>
+          <div class="proj-metrics">
+            <div><div class="num">$1.8M</div><div class="cap">annualized lift</div></div>
+            <div><div class="num">40K</div><div class="cap">users in test</div></div>
+            <div><div class="num">98%</div><div class="cap">confidence</div></div>
+          </div>
+          <a class="proj-link" href="#">Read the write-up
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </a>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <h3>Self-serve revenue dashboard</h3>
+            <span class="proj-tag">Tableau · dbt</span>
+          </div>
+          <p>Replaced 12 conflicting spreadsheets with a single dbt-modeled source of truth and a Tableau dashboard the whole revenue org now opens daily.</p>
+          <div class="proj-metrics">
+            <div><div class="num">12→1</div><div class="cap">sources unified</div></div>
+            <div><div class="num">340</div><div class="cap">weekly active users</div></div>
+            <div><div class="num">4 hrs</div><div class="cap">saved / week</div></div>
+          </div>
+          <a class="proj-link" href="#">Read the write-up
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </a>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <h3>Regional demand forecasting</h3>
+            <span class="proj-tag">R · Forecasting</span>
+          </div>
+          <p>Built a SARIMA-based forecasting pipeline for regional inventory planning, cutting stockouts during peak season across 14 markets.</p>
+          <div class="proj-metrics">
+            <div><div class="num">-22%</div><div class="cap">stockout rate</div></div>
+            <div><div class="num">14</div><div class="cap">markets covered</div></div>
+            <div><div class="num">±4%</div><div class="cap">forecast error</div></div>
+          </div>
+          <a class="proj-link" href="#">Read the write-up
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="label">03 · Experience</span>
+          <h2>Where I've worked the data.</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="trow">
+          <div class="when">2023 — Now</div>
+          <div>
+            <h4>Senior Data Analyst</h4>
+            <p>Own analytics for the growth org: experimentation, retention modeling, and the metrics that go into board decks.</p>
+          </div>
+          <div class="co">Northbeam Co.</div>
+        </div>
+        <div class="trow">
+          <div class="when">2021 — 2023</div>
+          <div>
+            <h4>Data Analyst</h4>
+            <p>Built the company's first self-serve BI layer and led weekly experiment reviews across product and marketing.</p>
+          </div>
+          <div class="co">Fieldstone Labs</div>
+        </div>
+        <div class="trow">
+          <div class="when">2020 — 2021</div>
+          <div>
+            <h4>Junior Analyst, Marketing</h4>
+            <p>Automated campaign reporting, cutting weekly reporting time from two days to two hours.</p>
+          </div>
+          <div class="co">Harlow &amp; Finch</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div>
+        <span class="label">04 · Contact</span>
+        <h2>Let's find the story<br>in your data.</h2>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:alex.rivera@example.com">alex.rivera@example.com</a>
+        <a href="#">linkedin.com/in/alexrivera</a>
+        <a href="#">github.com/alexrivera</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Alex Rivera</span>
+      <span>Manila, Philippines</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
